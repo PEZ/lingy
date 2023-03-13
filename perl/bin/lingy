@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e -u -o pipefail
+
+die() {
+  echo "$*" >&2
+  exit 1
+}
+
+if [[ ${LINGY_RUNTIME-} && -x $LINGY_RUNTIME ]]; then
+  exec "$LINGY_RUNTIME" "$@"
+fi
+
+# echo "lingy: You should 'export LINGY_RUNTIME=/path/to/_lingy.xxx'" >&2
+
+exec _lingy.pl "$@"
