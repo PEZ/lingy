@@ -14,6 +14,7 @@ our %special_dispatch = (
     'import*'           => \&special_import,
     'let*'              => \&special_let,
     'loop'              => \&special_loop,
+    'new'               => \&special_new,
     'recur'             => \&special_recur,
     'quasiquote'        => \&special_quasiquote,
     'quasiquoteexpand'  => \&special_quasiquoteexpand,
@@ -121,6 +122,7 @@ sub special_dot {
         $target = "${class}::${shift @args}";
         @args = map { $_->isa(SYMBOL)
             ? $env->get($_) : $_; } @args;
+#         XXX [$target, @args] if READY;
         no strict 'refs';
         return &{$target}(@args);
     }
@@ -277,6 +279,10 @@ sub special_loop {
     return ($a2, $env);
 }
 
+sub special_new {
+    my ($ast, $env) = @_;
+}
+
 sub special_quasiquote {
     my ($ast, $env) = @_;
     return (quasiquote($ast->[1]), $env);
@@ -394,9 +400,15 @@ sub macroexpand {
             $member = symbol(substr($$member, 1));
             return list([symbol('.'), $instance, $member, @rest]);
         }
-#         if ($sym =~ /^(.*)\.$/) {
-#             XXX my $class = $Lingy::Main::class->{String};
-#         }
+        if ($sym =~ /^($namespace_re)\.$/) {
+            my (undef, @args) = @$ast;
+            return list([
+                symbol('.'),
+                symbol($1),
+                symbol('new'),
+                @args,
+            ]);
+        }
         if (($call = $env->get($sym, 1)) and
             ref($call) eq MACRO
         ) {
