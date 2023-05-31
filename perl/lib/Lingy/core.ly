@@ -167,7 +167,11 @@
 
 (defn apply [f & args] (. lingy.lang.RT (apply f args)))
 
-(defn assoc [hash & pairs] (. hash assoc pairs))
+(defn assoc
+  ([map key val] (lingy.lang.RT/assoc map key val))
+  ([map key val & kvs]
+    (let [ret (assoc map key val)]
+      (apply assoc ret (first kvs) (second kvs) (nnext kvs)))))
 
 (defn atom [value] (. lingy.lang.RT (atom_ value)))
 
@@ -497,6 +501,11 @@
   [num] (. lingy.lang.Numbers (isZero num)))
 
 ; Private functions:
+
+; user=> (apply + 3 4 [5 6])
+; 18
+; user=> (eval (cons + (spread [3 4 [5 6]])))
+; 18
 (defn -spread [arglist]
   (cond
     (nil? arglist) nil
