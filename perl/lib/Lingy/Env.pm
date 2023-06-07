@@ -3,8 +3,6 @@ package Lingy::Env;
 
 use Lingy::Common;
 
-sub space { shift->{space} }
-
 sub new {
     my ($class, %args) = @_;
     my $self = bless {
@@ -36,15 +34,6 @@ sub set {
         : symbol($space->_name . "/$symbol");
 }
 
-sub ns_set {
-    my ($self, $symbol, $value) = @_;
-    my $space = RT->current_ns();
-    $space->{$symbol} = $value;
-    return ref($space) eq 'HASH'
-        ? $symbol
-        : symbol($space->_name . "/$symbol");
-}
-
 sub get {
     my ($self, $symbol, $optional) = @_;
 
@@ -56,8 +45,8 @@ sub get {
         if $symbol =~ m{./.};
 
     while ($self) {
-        my $ns = $self->space;
-        if (defined(my $value = $ns->{$symbol})) {
+        my $space = $self->{space};
+        if (defined(my $value = $space->{$symbol})) {
             return $value;
         }
         $self = $self->{outer};

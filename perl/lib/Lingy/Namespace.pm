@@ -39,6 +39,12 @@ sub current {
     return $self;
 }
 
+sub set {
+    my ($self, $symbol, $value) = @_;
+    $self->{$symbol} = $value;
+    return symbol($self->_name . "/$symbol");
+}
+
 sub getName {
     symbol($_[0]->_name);
 }

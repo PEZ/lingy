@@ -98,13 +98,13 @@ sub special_def {
     $a2 //= nil;
     err "Can't def a qualified symbol: '$a1'"
         if $a1 =~ m{./.};
-    return $env->ns_set($$a1, evaluate($a2, $env));
+    RT->current_ns->set($$a1, evaluate($a2, $env));
 }
 
 sub special_defmacro {
     my ($ast, $env) = @_;
     my (undef, $a1, $a2) = @$ast;
-    return $env->ns_set($$a1, MACRO->new(evaluate($a2, $env)));
+    RT->current_ns->set($$a1, MACRO->new(evaluate($a2, $env)));
 }
 
 sub special_do {
