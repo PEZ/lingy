@@ -97,7 +97,7 @@ sub init {
 
     $core_ns = $self->core_namespace();
     $user_ns = NAMESPACE->new('user')
-        ->refer(symbol($self->core_ns->_NAME))
+        ->refer(symbol($self->core_ns->_name))
         ->current;
 
     $ready = 1;
@@ -309,7 +309,7 @@ sub create_ns {
     my ($name) = @_;
     err "Invalid ns name '$name'"
         unless $name =~ /^\w+(\.\w+)*$/;
-    NAMESPACE->new($name)->refer(symbol($core_ns->_NAME));
+    NAMESPACE->new($name)->refer(symbol($core_ns->_name));
 }
 
 sub dec { $_[0] - 1 }
@@ -417,7 +417,7 @@ sub ns_ {
 
     my $ns;
     $ns = $namespaces{$name} //
-    NAMESPACE->new($name)->refer(symbol($core_ns->_NAME));
+    NAMESPACE->new($name)->refer(symbol($core_ns->_name));
     $ns->current;
 
     for my $arg (@$args) {

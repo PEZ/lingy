@@ -5,18 +5,14 @@ use Lingy::Common;
 
 use Sub::Name 'subname';
 
-# has '_NAME';
-sub _NAME {
-    my ($self) = @_;
-    $self->{'_NAME'} // '';
-}
+has '_name';
 
 sub new {
     my $class = shift;
     my $name = shift;
 
     # XXX Could be a HashMap
-    my $self = bless {'_NAME' => $name, @_}, __PACKAGE__;
+    my $self = bless {'_name' => $name, @_}, __PACKAGE__;
 
     return RT->namespaces->{$name} = $self;
 }
@@ -35,7 +31,7 @@ sub refer {
 
 sub current {
     my ($self) = @_;
-    my $name = $self->_NAME or die;
+    my $name = $self->_name or die;
     RT->current_ns_name($name);
     RT->namespaces->{$name} = $self;
     RT->env->{space} = $self;
@@ -44,7 +40,7 @@ sub current {
 }
 
 sub getName {
-    symbol($_[0]->_NAME);
+    symbol($_[0]->_name);
 }
 
 sub getImports {
@@ -55,16 +51,14 @@ sub getInterns {
     my $map = {
         %{$_[0]},
     };
-    delete $map->{'_NAME'};
+    delete $map->{'_name'};
     HASHMAP->new([ %$map ]);
 }
 
 sub getMappings {
-    my $map = {
-        %{$_[0]},
-    };
-    delete $map->{'_NAME'};
-    HASHMAP->new([ %$map ]);
+    my %map = %{$_[0]};
+    delete $map{'_name'};
+    HASHMAP->new([ %map ]);
 }
 
 1;
