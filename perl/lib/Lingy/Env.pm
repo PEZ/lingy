@@ -37,6 +37,7 @@ sub set {
 sub get {
     my ($self, $symbol, $optional) = @_;
 
+    # XXX Temporary hack until Vars
     if ("$symbol" eq '*ns*') {
         return RT->current_ns;
     }
