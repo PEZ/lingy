@@ -33,7 +33,7 @@ sub set {
     $space->{$symbol} = $value;
     return ref($space) eq 'HASH'
         ? $symbol
-        : symbol($space->NAME . "/$symbol");
+        : symbol($space->_NAME . "/$symbol");
 }
 
 sub ns_set {
@@ -42,7 +42,7 @@ sub ns_set {
     $space->{$symbol} = $value;
     return ref($space) eq 'HASH'
         ? $symbol
-        : symbol($space->NAME . "/$symbol");
+        : symbol($space->_NAME . "/$symbol");
 }
 
 sub get {

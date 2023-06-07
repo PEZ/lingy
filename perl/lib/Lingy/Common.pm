@@ -79,6 +79,7 @@ BEGIN {
         string
         symbol
 
+        has
         err
         box_val
         unbox_val
@@ -118,6 +119,19 @@ sub READY { RT->ready }
 sub list     { LIST->new(@_) }
 sub string   { STRING->new(@_) }
 sub symbol   { SYMBOL->new(@_) }
+
+sub has {
+    my ($caller) = caller;
+    my $name = shift;
+    my $method =
+        sub {
+            $#_
+                ? $_[0]{$name} = $_[1]
+                : $_[0]{$name};
+        };
+    no strict 'refs';
+    *{"${caller}::$name"} = $method;
+};
 
 sub err {
     my $msg = shift;
