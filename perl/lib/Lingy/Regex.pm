@@ -2,9 +2,8 @@ use strict; use warnings;
 package Lingy::Regex;
 
 use Lingy::Common;
-use base SCALARTYPE;
-
-use constant NAME => 'lingy.lang.Regex';
+use Lingy::ScalarClass;
+use base 'Lingy::ScalarClass';
 
 # need these things:
 # * if-some

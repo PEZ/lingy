@@ -2,7 +2,8 @@ use strict; use warnings;
 package Lingy::Macro;
 
 use Lingy::Common;
-use base CLASS;
+use Lingy::Class;
+use base 'Lingy::Class';
 
 sub new {
     my ($class, $function) = @_;

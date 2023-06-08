@@ -1,8 +1,8 @@
 use strict; use warnings;
 package Lingy::Character;
 
-use Lingy::Common;
-use base SCALARTYPE;
+use Lingy::ScalarClass;
+use base 'Lingy::ScalarClass';
 
 use overload cmp => \&comp_pair;
 

@@ -98,7 +98,16 @@ BEGIN {
     >;
 }
 
-use Lingy::Printer;
+{
+    my ($n, $t, $f);
+    ($n, $t, $f) = (1, 1, 0);
+    my $nil = bless \$n, 'Lingy::Nil';
+    my $true = bless \$t, BOOLEAN;
+    my $false = bless \$f, BOOLEAN;
+    sub nil { $nil }
+    sub true { $true }
+    sub false { $false }
+}
 
 our $namespace_re = qr{(?:
     \w+
@@ -192,7 +201,7 @@ sub comp_pair {
         my $i = 0;
         for my $e (@$x) {
             return 1 if $i > @$y;
-            my $r = comp_pair $x->[$i], $y->[$i];
+            my $r = comp_pair($x->[$i], $y->[$i]);
             return $r if $r;
             $i++;
         }

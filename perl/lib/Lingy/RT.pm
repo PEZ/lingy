@@ -4,11 +4,7 @@ package Lingy::RT;
 use Lingy;
 use Lingy::Common;
 use Lingy::Evaluator;
-use Lingy::HashMap;
 use Lingy::Namespace;
-use Lingy::Nil;
-use Lingy::Sequential;
-use Lingy::Symbol;
 use Lingy::ReadLine;
 
 use constant LANG => 'Lingy';
