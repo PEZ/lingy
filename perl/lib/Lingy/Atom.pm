@@ -1,7 +1,6 @@
 use strict; use warnings;
 package Lingy::Atom;
 
-use Lingy::ScalarClass;
 use base 'Lingy::ScalarClass';
 
 sub new {

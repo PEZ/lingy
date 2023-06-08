@@ -3,7 +3,6 @@ package Lingy::Symbol;
 
 use Lingy::Common;
 use Lingy::Evaluator;
-use Lingy::ScalarClass;
 use base 'Lingy::ScalarClass';
 
 use overload cmp => \&comp_pair;

@@ -2,7 +2,6 @@ use strict; use warnings;
 package Lingy::Regex;
 
 use Lingy::Common;
-use Lingy::ScalarClass;
 use base 'Lingy::ScalarClass';
 
 # need these things:

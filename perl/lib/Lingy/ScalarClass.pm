@@ -1,7 +1,6 @@
 use strict; use warnings;
 package Lingy::ScalarClass;
 
-use Lingy::Class;
 use base 'Lingy::Class';
 
 use overload '""' => sub { ${$_[0]} };

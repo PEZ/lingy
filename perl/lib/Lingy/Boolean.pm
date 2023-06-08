@@ -2,7 +2,6 @@ use strict; use warnings;
 package Lingy::Boolean;
 
 use Lingy::Common;
-use Lingy::ScalarClass;
 use base 'Lingy::ScalarClass';
 
 sub new {

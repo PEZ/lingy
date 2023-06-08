@@ -1,7 +1,6 @@
 use strict; use warnings;
 package Lingy::Keyword;
 
-use Lingy::ScalarClass;
 use base 'Lingy::ScalarClass';
 
 use overload cmp => \&comp_pair;

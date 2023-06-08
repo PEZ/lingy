@@ -2,7 +2,6 @@ use strict; use warnings;
 package Lingy::Vector;
 
 use Lingy::Common;
-use Lingy::ListClass;
 use Lingy::Sequential;
 use base 'Lingy::ListClass', 'Lingy::Sequential';
 
