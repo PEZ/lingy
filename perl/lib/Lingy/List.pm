@@ -2,6 +2,7 @@ use strict; use warnings;
 package Lingy::List;
 
 use Lingy::Common;
+use Lingy::Sequential;
 use base LISTTYPE, SEQUENTIAL;
 
 sub _to_seq {
